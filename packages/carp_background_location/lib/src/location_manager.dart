@@ -15,7 +15,10 @@ class LocationManager {
           "Background location is on to keep the app up-to-date with your location.",
       _notificationBigMsg =
           "Background location is on to keep the app up-to-date with your location. "
-          "This is required for main features to work properly when the app is not running.";
+          "This is required for main features to work properly when the app is not running.",
+      _notificationIcon = '';
+  Color _notificationIconColor = Colors.grey;
+  VoidCallback? _notificationTapCallback;
 
   int _interval = 5;
   double _distanceFilter = 0;
@@ -89,6 +92,9 @@ class LocationManager {
               notificationTitle: _notificationTitle,
               notificationMsg: _notificationMsg,
               notificationBigMsg: _notificationBigMsg,
+              notificationIcon: _notificationIcon,
+              notificationIconColor: _notificationIconColor,
+              notificationTapCallback: _notificationTapCallback,
             )),
         iosSettings: IOSSettings(
           accuracy: _accuracy,
@@ -103,6 +109,8 @@ class LocationManager {
   Future<void> stop() async =>
       await BackgroundLocator.unRegisterLocationUpdate();
 
+  set channelName(String name) => _channelName = name;
+
   /// Set the title of the notification for the background service.
   /// Android only.
   set notificationTitle(String title) => _notificationTitle = title;
@@ -114,6 +122,13 @@ class LocationManager {
   /// Set the long message of the notification for the background service.
   /// Android only.
   set notificationBigMsg(String message) => _notificationBigMsg = message;
+
+  set notificationIcon(String icon) => _notificationIcon = icon;
+
+  set notificationIconColor(Color color) => _notificationIconColor = color;
+
+  set notificationTapCallback(VoidCallback? callback) =>
+      _notificationTapCallback = callback;
 
   /// Set the update interval in seconds.
   /// Android only.
