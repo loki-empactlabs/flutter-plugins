@@ -109,7 +109,7 @@ class LocationManager {
   Future<void> stop() async =>
       await BackgroundLocator.unRegisterLocationUpdate();
 
-  set channelName(String name) => _channelName = name;
+  set notificationChannelName(String name) => _channelName = name;
 
   /// Set the title of the notification for the background service.
   /// Android only.
